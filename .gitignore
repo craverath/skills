@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Env / secrets
+.env
+*.local
+
+# Logs
+*.log
+
+# Skills excluded from version control
+handoff/
+
+# Local agent instruction files (never commit — public repo)
+/CLAUDE.md
+/AGENT.md
