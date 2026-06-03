@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superpowers — Fluxo e Skills</title>
+<style>
+  :root{
+    --meta:#7c3aed; --collab:#2563eb; --test:#16a34a; --debug:#ea580c;
+    --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --muted:#94a3b8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+       background:var(--bg);color:var(--txt);line-height:1.5;padding:32px 20px 64px}
+  header{max-width:1100px;margin:0 auto 28px}
+  h1{margin:0 0 6px;font-size:1.9rem}
+  header p{margin:4px 0;color:var(--muted)}
+  header a{color:#60a5fa}
+  .wrap{max-width:1100px;margin:0 auto}
+  h2{font-size:1.25rem;margin:40px 0 14px;border-bottom:1px solid var(--line);padding-bottom:6px}
+
+  /* legenda */
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0}
+  .legend span{display:flex;align-items:center;gap:7px;font-size:.85rem;color:var(--muted)}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+  /* fluxo principal */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
+  .step{flex:1 1 150px;min-width:150px;background:var(--card);border:1px solid var(--line);
+        border-radius:10px;padding:12px 14px;position:relative;margin:8px 22px 8px 0}
+  .step:not(:last-child)::after{content:"→";position:absolute;right:-20px;top:50%;
+        transform:translateY(-50%);color:var(--muted);font-size:1.4rem}
+  .step .n{font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.5px}
+  .step .name{font-weight:700;font-size:.92rem;margin:3px 0}
+  .step .role{font-size:.78rem;color:var(--muted)}
+  .branch{font-size:.72rem;color:var(--muted);margin-top:6px;border-top:1px dashed var(--line);padding-top:6px}
+
+  /* faixa transversal */
+  .cross{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .cross .step{flex:1 1 220px;margin:0}
+  .cross .step::after{content:none}
+
+  /* cards de skills */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .skill{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);
+         border-radius:10px;padding:16px 18px}
+  .skill h3{margin:0 0 2px;font-size:1.02rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .skill .meta{font-size:.76rem;color:var(--muted);margin-bottom:10px}
+  .skill ul{margin:0;padding-left:18px}
+  .skill li{margin:5px 0;font-size:.88rem}
+  .m-meta{border-left-color:var(--meta)} .m-collab{border-left-color:var(--collab)}
+  .m-test{border-left-color:var(--test)} .m-debug{border-left-color:var(--debug)}
+  .tag{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:20px;
+       color:#fff;vertical-align:middle;margin-left:6px}
+  .t-meta{background:var(--meta)} .t-collab{background:var(--collab)}
+  .t-test{background:var(--test)} .t-debug{background:var(--debug)}
+  footer{max-width:1100px;margin:48px auto 0;color:var(--muted);font-size:.8rem;
+         border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Superpowers — Fluxo de desenvolvimento &amp; Skills</h1>
+  <p>Mapa das 14 skills do framework <a href="https://github.com/obra/superpowers">obra/superpowers</a>: o que cada uma faz, em tópicos, e como se encaixam no fluxo.</p>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--meta)"></i>Meta</span>
+    <span><i class="dot" style="background:var(--collab)"></i>Colaboração</span>
+    <span><i class="dot" style="background:var(--test)"></i>Testes</span>
+    <span><i class="dot" style="background:var(--debug)"></i>Depuração</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2>Fluxo principal</h2>
+  <div class="flow">
+    <div class="step m-meta"><div class="n">SEMPRE</div><div class="name">using-superpowers</div><div class="role">Verifica e ativa skills antes de agir</div></div>
+    <div class="step m-collab"><div class="n">1 · DESENHAR</div><div class="name">brainstorming</div><div class="role">Ideia → design aprovado</div></div>
+    <div class="step m-collab"><div class="n">2 · ISOLAR</div><div class="name">using-git-worktrees</div><div class="role">Espaço de trabalho isolado</div></div>
+    <div class="step m-collab"><div class="n">3 · PLANEJAR</div><div class="name">writing-plans</div><div class="role">Design → tarefas pequenas</div></div>
+    <div class="step m-collab"><div class="n">4 · CONSTRUIR</div><div class="name">subagent-driven-development</div><div class="role">Tarefa a tarefa, com revisão</div>
+      <div class="branch">alternativa: <b>executing-plans</b><br>apoio: <b>dispatching-parallel-agents</b></div></div>
+    <div class="step m-collab"><div class="n">5 · ENTREGAR</div><div class="name">finishing-a-development-branch</div><div class="role">Merge / PR / manter / descartar</div></div>
+  </div>
+
+  <h2>Dentro de cada tarefa (laço de implementação)</h2>
+  <div class="flow">
+    <div class="step m-test"><div class="n">A</div><div class="name">test-driven-development</div><div class="role">Teste falha → código mínimo → passa</div></div>
+    <div class="step m-debug"><div class="n">B</div><div class="name">systematic-debugging</div><div class="role">Bug? Causa raiz antes de corrigir</div></div>
+    <div class="step m-collab"><div class="n">C</div><div class="name">requesting-code-review</div><div class="role">Revisão por gravidade</div></div>
+    <div class="step m-collab"><div class="n">D</div><div class="name">receiving-code-review</div><div class="role">Avalia e aplica o feedback</div></div>
+    <div class="step m-debug"><div class="n">E</div><div class="name">verification-before-completion</div><div class="role">Evidência antes de dizer "pronto"</div></div>
+  </div>
+
+  <h2>Transversais (valem em qualquer momento)</h2>
+  <div class="cross">
+    <div class="step m-meta"><div class="name">using-superpowers</div><div class="role">Porta de entrada: sempre checa se há skill aplicável.</div></div>
+    <div class="step m-debug"><div class="name">verification-before-completion</div><div class="role">Antes de qualquer alegação de sucesso.</div></div>
+    <div class="step m-debug"><div class="name">systematic-debugging</div><div class="role">Diante de qualquer bug ou comportamento estranho.</div></div>
+    <div class="step m-meta"><div class="name">writing-skills</div><div class="role">Para criar/editar as próprias skills.</div></div>
+  </div>
+
+  <h2>Skills em tópicos</h2>
+  <div class="grid">
+
+    <div class="skill m-meta">
+      <h3>using-superpowers <span class="tag t-meta">Meta</span></h3>
+      <div class="meta">Porta de entrada · sempre ativa</div>
+      <ul>
+        <li>Ativa no início de qualquer conversa, antes de responder.</li>
+        <li>Regra do "1%": se houver chance de uma skill se aplicar, invoca para checar.</li>
+        <li>Prioridade: instruções do usuário &gt; skills &gt; prompt padrão.</li>
+        <li>Skills de processo primeiro (brainstorming, debugging), depois implementação.</li>
+        <li>Anuncia a skill em uso e a segue à risca.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>brainstorming <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 1 · transforma ideia em design</div>
+      <ul>
+        <li>Diálogo socrático: uma pergunta por vez, múltipla escolha quando dá.</li>
+        <li>Propõe 2-3 abordagens com prós/contras e recomendação.</li>
+        <li>Apresenta o design em seções, aprovando cada uma.</li>
+        <li>Nenhum código antes do design aprovado — vale até para projeto "simples".</li>
+        <li>Salva o spec em docs/ e pede revisão antes de seguir.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>using-git-worktrees <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 2 · espaço de trabalho isolado</div>
+      <ul>
+        <li>Detecta isolamento já existente antes de criar qualquer coisa.</li>
+        <li>Prefere ferramentas nativas; git worktree só como fallback.</li>
+        <li>Verifica que o diretório está no .gitignore.</li>
+        <li>Roda o setup do projeto (npm/cargo/pip…).</li>
+        <li>Confirma um baseline de testes limpo antes de implementar.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>writing-plans <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 3 · design em plano de tarefas</div>
+      <ul>
+        <li>Plano para alguém sem contexto: caminhos de arquivo exatos.</li>
+        <li>Tarefas pequenas (2-5 min) com código e passos de verificação.</li>
+        <li>Princípios: DRY, YAGNI, TDD, commits frequentes.</li>
+        <li>Proibido placeholder ("TODO", "depois", "tratar erros").</li>
+        <li>Autorrevisão de cobertura do spec e consistência de tipos.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>subagent-driven-development <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 4 (recomendada) · construir tarefa a tarefa</div>
+      <ul>
+        <li>Um subagente novo por tarefa, com contexto isolado.</li>
+        <li>Revisão em duas etapas: conformidade com o spec, depois qualidade.</li>
+        <li>Execução contínua — não pausa para checar entre tarefas.</li>
+        <li>Usa o modelo mais barato que dá conta de cada papel.</li>
+        <li>Trata status do implementador: DONE, BLOCKED, NEEDS_CONTEXT…</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>executing-plans <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 4 (alternativa) · sem subagentes</div>
+      <ul>
+        <li>Executa o plano em sessão separada, com checkpoints.</li>
+        <li>Revisa o plano criticamente antes de começar.</li>
+        <li>Segue cada passo à risca e roda as verificações.</li>
+        <li>Para e pergunta quando bloqueado — não chuta.</li>
+        <li>Encerra chamando finishing-a-development-branch.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>dispatching-parallel-agents <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Apoio · paralelismo</div>
+      <ul>
+        <li>Para 2+ tarefas independentes, sem estado compartilhado.</li>
+        <li>Um agente por domínio de problema, rodando em paralelo.</li>
+        <li>Prompts focados, autocontidos, com saída esperada clara.</li>
+        <li>Revisa, checa conflitos e integra; roda a suíte completa.</li>
+        <li>Não usar quando as falhas são relacionadas entre si.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-test">
+      <h3>test-driven-development <span class="tag t-test">Testes</span></h3>
+      <div class="meta">Dentro da implementação · teste primeiro</div>
+      <ul>
+        <li>Lei de ferro: nenhum código de produção sem um teste que falhe antes.</li>
+        <li>Ciclo VERMELHO → VERDE → REFATORAR.</li>
+        <li>Ver o teste falhar prova que ele testa a coisa certa.</li>
+        <li>Código mínimo para passar; nada de over-engineering.</li>
+        <li>Escreveu código antes do teste? Apaga e recomeça pelo teste.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>requesting-code-review <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Entre tarefas · pedir revisão</div>
+      <ul>
+        <li>Despacha um revisor com contexto preciso (não o histórico da sessão).</li>
+        <li>Revisa cedo e com frequência.</li>
+        <li>Classifica problemas: Crítico / Importante / Pequeno.</li>
+        <li>Corrige críticos e importantes antes de seguir.</li>
+        <li>Rebate o revisor com argumento técnico quando ele erra.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>receiving-code-review <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Resposta · receber feedback</div>
+      <ul>
+        <li>Avaliação técnica, não concordância performática.</li>
+        <li>Proibido "você tem toda razão!", "ótimo ponto!".</li>
+        <li>Verifica contra a realidade do código antes de implementar.</li>
+        <li>Esclarece todos os itens dúbios antes de começar.</li>
+        <li>Rebate com razão técnica e aplica YAGNI.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-debug">
+      <h3>systematic-debugging <span class="tag t-debug">Depuração</span></h3>
+      <div class="meta">Quando surge um bug</div>
+      <ul>
+        <li>Lei de ferro: nenhuma correção sem investigar a causa raiz.</li>
+        <li>4 fases: causa raiz → padrão → hipótese → implementação.</li>
+        <li>Reproduz, lê erros, checa mudanças recentes, instrumenta.</li>
+        <li>Uma hipótese e uma mudança por vez.</li>
+        <li>3+ correções falharam? Questione a arquitetura.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-debug">
+      <h3>verification-before-completion <span class="tag t-debug">Depuração</span></h3>
+      <div class="meta">Antes de concluir qualquer coisa</div>
+      <ul>
+        <li>Lei de ferro: nenhuma alegação de "pronto" sem evidência fresca.</li>
+        <li>Rode o comando, leia a saída, só então afirme.</li>
+        <li>"Deveria funcionar" / "provavelmente" são bandeiras vermelhas.</li>
+        <li>Não confie em relatório de subagente — verifique o diff.</li>
+        <li>Evidência antes de alegações, sempre.</li>
+      </ul>
+    </div>
+
+    <div class="skill m-collab">
+      <h3>finishing-a-development-branch <span class="tag t-collab">Colaboração</span></h3>
+      <div class="meta">Etapa 5 · entregar o trabalho</div>
+      <ul>
+        <li>Verifica que os testes passam antes de apresentar opções.</li>
+        <li>Detecta o ambiente: repo normal / worktree / detached HEAD.</li>
+        <li>4 opções: merge / PR / manter / descartar.</li>
+        <li>Descartar exige confirmação digitada.</li>
+        <li>Limpa o worktree só nos casos certos (merge e descartar).</li>
+      </ul>
+    </div>
+
+    <div class="skill m-meta">
+      <h3>writing-skills <span class="tag t-meta">Meta</span></h3>
+      <div class="meta">Criar/editar as próprias skills</div>
+      <ul>
+        <li>Escrever skills É TDD aplicado a documentação de processo.</li>
+        <li>Cenário de pressão = teste; SKILL.md = código de produção.</li>
+        <li>Veja o agente falhar sem a skill (baseline) antes de escrever.</li>
+        <li>description = "quando usar", nunca resumo do processo (CSO).</li>
+        <li>Refatora fechando brechas e racionalizações.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Fonte: github.com/obra/superpowers · Visualização gerada para estudo do fluxo. As skills se ativam automaticamente quando o contexto se aplica.
+</footer>
+</body>
+</html>
