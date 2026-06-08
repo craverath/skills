@@ -29,7 +29,12 @@ pode ser curto (poucas frases), mas você **precisa** apresentá-lo e ter aprova
 2. **Fazer perguntas, uma de cada vez** — entenda o objetivo, as limitações e o que
    significa "deu certo" para a pessoa.
 3. **Propor 2-3 caminhos** — explique os prós e contras de cada um, em linguagem
-   simples, e diga qual você recomenda e por quê.
+   simples, e diga qual você recomenda e por quê. **A linguagem e o framework não
+   entram aqui como opção:** são fixos pelo tipo de projeto nas regras globais
+   (`../../global-rules/AGENTS.md` → "Technology stack"). Os caminhos são sobre a
+   abordagem/escopo dentro dessa base, não sobre "qual tecnologia usar". Diga, em
+   uma frase, qual base se aplica (web → Next.js + TypeScript; script/automação →
+   Python; desktop → Python ou Electron) e siga.
 4. **Apresentar o desenho** — em pedaços curtos o suficiente para a pessoa ler e
    entender. Pergunte, a cada pedaço, se está certo antes de continuar.
 5. **Salvar o desenho** — grave em `docs/specs/AAAA-MM-DD--desenho.md`.

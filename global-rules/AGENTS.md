@@ -1,5 +1,38 @@
 # Agent Global Rules
 
+## Technology stack (mandatory)
+
+Only two languages are allowed: **TypeScript** or **Python**. Nothing else.
+In every case, **always typed** and **always tested** — not optional.
+
+Pick the stack by *what is being built*, not by preference:
+
+- **Website or app that opens in a browser** (pages, dashboards, login areas,
+  stores) → **Next.js + TypeScript**.
+- **Script, automation, or command-line tool** (process files/data, integrate
+  services, scheduled jobs) → **Python**.
+- **Desktop app with a window/GUI** → **Python or Electron** (see tie-breaker).
+
+If an idea spans more than one type, split it and apply the rule per part
+(e.g. a website *and* an import script → Next.js for the site, Python for the script).
+
+Fixed tools per stack (no per-project bikeshedding):
+
+- **Web (Next.js + TS):** strict TypeScript (no `any`), Next.js App Router, pnpm,
+  Vitest + Playwright, ESLint + Prettier.
+- **Python:** full type hints, uv, pyright (strict), pytest, ruff (lint + format).
+- **Electron:** strict TypeScript, pnpm, React renderer, Vitest + Playwright,
+  ESLint + Prettier.
+- **Python desktop GUI:** Python tools above + PySide6.
+
+Desktop tie-breaker (Python vs Electron) — recommend one and explain why:
+
+- Prefer **Electron** for rich/web-like UIs, when the web (Next.js) skills or code
+  are reused, or when a polished cross-platform installer matters.
+- Prefer **Python** when the program is mostly data/file processing, integrates
+  heavily with the OS/hardware/local tools, or the UI is simple and a light
+  footprint matters.
+
 ## Git Commits - No AI / Agent References
 
 **NEVER commit on your own.** 

@@ -30,4 +30,17 @@ primeiro entende, planeja, constrói com segurança, revisa e só então entrega
 - Nada de pular etapas porque "parece simples" — toda ideia passa pelo fluxo.
 - Cada decisão importante é apresentada para você aprovar antes de seguir.
 
+## Tecnologia (fixa, por padrão)
+
+Você não escolhe a linguagem — ela é definida pelo tipo de projeto, e o agente já
+segue isso automaticamente (está nas regras globais, não é preciso pedir):
+
+- **Site ou app no navegador** → Next.js + TypeScript.
+- **Script, automação ou linha de comando** → Python.
+- **Programa de janela no computador (desktop)** → Python ou Electron.
+
+Sempre **com tipagem** e **com testes** — em qualquer caso. As ferramentas exatas de
+cada base e o critério de desempate de desktop estão em `../global-rules/AGENTS.md`
+(seção "Technology stack").
+
 Veja também as regras globais do agente em `../global-rules/AGENTS.md`.

@@ -19,3 +19,4 @@ handoff/
 # Local agent instruction files (never commit — public repo)
 /CLAUDE.md
 /AGENT.md
+.obsidian/
