@@ -1,56 +1,70 @@
 ---
 name: requesting-code-review
-description: Fourth step of the guided flow for non-developers. Use after building a feature and before finishing. Runs an independent review of the work to catch problems, classified by severity, and decides what must be fixed before delivering.
+description: Step 4 of the guided development flow for non-developers. Use after building a feature and before finishing it. Runs an independent review of the work against the plan, reports problems classified by severity in plain language, and decides what must be fixed before delivery. Hand off to finishing-a-development-branch afterward.
 user-invocable: true
 allowed-tools:
   - Read
   - Bash
 ---
 
-# Requesting Code Review — Revisar o trabalho
+# Requesting Code Review — Review the work
 
-Antes de dar o trabalho por pronto, peça uma **revisão independente**. A ideia é
-ter um segundo olhar — focado só no que foi construído — para pegar problemas antes
-que eles cresçam. Você não precisa entender o código; o agente revisa e te traz o
-resultado em linguagem simples.
+Before calling the work done, run an **independent review**. The point is a second
+look — focused only on what was built — to catch problems before they grow. The user
+does not need to understand the code; you review it and report the result in plain
+language.
 
-**Princípio central:** Revise cedo, revise com frequência.
+> These instructions are for you, the agent. Talk to the user in their own language.
 
-## Quando revisar
+**Core principle:** Review early, review often.
 
-**Sempre:**
-- depois de terminar uma funcionalidade importante;
-- antes de entregar/finalizar o trabalho.
+## When to review
 
-**Também ajuda:**
-- quando o agente ficou travado (um olhar novo ajuda);
-- depois de consertar um problema complicado.
+**Always:**
+- after finishing a meaningful feature;
+- before delivering / finishing the work.
 
-## Como funciona
+**Also helpful:**
+- when you got stuck (a fresh look helps);
+- after fixing a tricky problem.
 
-1. O agente compara o que foi construído com o que o plano pedia.
-2. Um revisor (independente do trabalho original) procura problemas e os classifica:
-   - **Crítico** — precisa ser corrigido agora; impede de seguir.
-   - **Importante** — corrigir antes de entregar.
-   - **Pequeno** — anotar para depois, não bloqueia.
-3. O agente te apresenta um resumo: o que está bom, e a lista de problemas por
-   gravidade, em linguagem simples.
+## How it works
 
-## O que fazer com o resultado
+1. Compare what was built against what the plan asked for.
+2. A reviewer (independent of the original work) looks for problems and classifies them:
+   - **Critical** — must be fixed now; blocks progress.
+   - **Important** — fix before delivering.
+   - **Minor** — note for later; does not block.
+3. Present a summary to the user: what is good, plus the list of problems by severity,
+   in plain language.
 
-- Corrigir os **críticos** imediatamente.
-- Corrigir os **importantes** antes de seguir.
-- Anotar os **pequenos** para depois.
-- Se o revisor estiver errado em algum ponto, o agente explica o porquê (com base
-  nos testes que provam que funciona) em vez de mudar à toa.
+## Security pass (always)
 
-## Nunca
+Always review against the Security rules in `../AGENTS.md`. At minimum:
 
-- Pular a revisão porque "é simples".
-- Ignorar um problema crítico.
-- Seguir para a entrega com problemas importantes em aberto.
+- No secrets in code, logs, or the repo; `.env` is git-ignored.
+- All external input is validated; DB access is parameterized (no injection).
+- Authorization is enforced server-side; auth uses a vetted library.
+- Dependencies audited (`pnpm audit` / `pip-audit`); Electron has
+  `contextIsolation`/`sandbox` on.
 
-## Próximo passo
+Treat any security finding as **Critical** or **Important** — never Minor.
 
-Com os problemas críticos e importantes resolvidos, siga para a skill
-`finishing-a-development-branch` para entregar.
+## What to do with the result
+
+- Fix **critical** problems immediately.
+- Fix **important** problems before moving on.
+- Note **minor** problems for later.
+- If the reviewer is wrong on a point, explain why (backed by the tests that prove it
+  works) instead of changing things blindly.
+
+## Never
+
+- Skip the review because "it's simple."
+- Ignore a critical problem.
+- Move on to delivery with important problems still open.
+
+## Next step
+
+With critical and important problems resolved, go to the
+`finishing-a-development-branch` skill to deliver.

@@ -40,7 +40,23 @@ segue isso automaticamente (está nas regras globais, não é preciso pedir):
 - **Programa de janela no computador (desktop)** → Python ou Electron.
 
 Sempre **com tipagem** e **com testes** — em qualquer caso. As ferramentas exatas de
-cada base e o critério de desempate de desktop estão em `../global-rules/AGENTS.md`
+cada base e o critério de desempate de desktop estão em `AGENTS.md`
 (seção "Technology stack").
 
-Veja também as regras globais do agente em `../global-rules/AGENTS.md`.
+## Segurança (por padrão)
+
+Segurança não é um extra para depois — o agente já constrói seguro desde o começo:
+
+- **Segredos nunca no código** — senhas, chaves e tokens ficam em variáveis de
+  ambiente; o arquivo `.env` nunca vai para o repositório.
+- **Nunca confiar na entrada** — tudo que vem de fora (formulários, links, arquivos)
+  é validado antes de usar.
+- **Sem brechas comuns** — acesso ao banco parametrizado (sem injeção), permissões
+  conferidas no servidor, dependências auditadas.
+- Coisas sensíveis (login, pagamento, dados pessoais, upload de arquivos) ganham
+  tarefas e testes próprios, e uma revisão de segurança dedicada antes de entregar.
+
+Os detalhes (geral + por stack) estão em `AGENTS.md` (seção
+"Security").
+
+Veja também as regras globais do agente em `AGENTS.md`.

@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Third step of the guided flow for non-developers. Use while building each part of the plan. Explains and enforces test-first construction (write a test, watch it fail, build the minimum to pass) in plain language so non-devs understand what guarantees the work is correct.
+description: Step 3 of the guided development flow for non-developers. Use while building each part of an approved plan. Enforces test-first construction (write a test, watch it fail, build the minimum to pass, then clean up) and explains each part to the user in plain language. Also covers fixing bugs test-first. Hand off to requesting-code-review afterward.
 user-invocable: true
 allowed-tools:
   - Read
@@ -9,61 +9,66 @@ allowed-tools:
   - Bash
 ---
 
-# Test-Driven Development — Construir com testes
+# Test-Driven Development — Build with tests
 
-Construa cada parte do plano usando **testes primeiro**. Um teste é uma verificação
-automática que confirma que algo funciona como deveria. Fazer o teste antes garante
-que o agente está construindo a coisa certa — e que ela continua funcionando depois.
+Build each part of the plan **test-first**. A test is an automatic check that
+confirms something works as it should. Writing the test first guarantees you are
+building the right thing — and that it keeps working later.
 
-Você não precisa escrever testes; o agente faz isso. Mas vale entender o ciclo,
-porque é ele que te dá segurança de que o trabalho está correto.
+> These instructions are for you, the agent. Talk to the user in their own language.
+> The user does not write tests — you do. But explain the cycle, because it is what
+> gives them confidence the work is correct.
 
-## A regra principal
+## The core rule
 
-> Nenhuma parte é construída sem um teste que primeiro **falhe**.
+> No part is built without a test that **fails first**.
 
-Se o agente escrever o código antes do teste, ele apaga e recomeça pelo teste. Ver o
-teste falhar primeiro é o que prova que o teste realmente verifica alguma coisa.
+If you write the code before the test, delete it and restart from the test. Watching
+the test fail first is what proves the test actually checks something.
 
-## O ciclo (vermelho → verde → limpar)
+## The cycle (red → green → clean)
 
-1. **VERMELHO — escrever o teste primeiro.**
-   O agente escreve uma verificação do que a parte deveria fazer.
-2. **Ver o teste falhar.** Obrigatório. Roda o teste e confirma que ele falha pelo
-   motivo certo (a funcionalidade ainda não existe) — não por um erro de digitação.
-3. **VERDE — construir o mínimo.** O agente escreve só o suficiente para o teste passar.
-   Nada de adicionar extras que ninguém pediu.
-4. **Ver o teste passar.** Obrigatório. Roda de novo e confirma que passou, sem erros
-   nem avisos, e que os outros testes continuam passando.
-5. **LIMPAR.** Com tudo passando, o agente organiza o código (sem mudar o comportamento)
-   e mantém os testes verdes.
+1. **RED — write the test first.** Write a check for what the part should do.
+2. **Watch it fail.** Mandatory. Run the test and confirm it fails for the right
+   reason (the feature does not exist yet) — not because of a typo.
+3. **GREEN — build the minimum.** Write only enough to make the test pass. Do not add
+   extras nobody asked for.
+4. **Watch it pass.** Mandatory. Run again and confirm it passes with no errors or
+   warnings, and that the other tests still pass.
+5. **CLEAN.** With everything green, tidy the code (without changing behavior) and
+   keep the tests green.
 
-Depois, repete o ciclo para a próxima parte.
+Then repeat the cycle for the next part.
 
-## Por que fazer o teste antes
+## Why test first
 
-- Teste escrito **depois** do código quase sempre passa de cara — e isso não prova
-  nada, porque você nunca o viu pegar um erro.
-- Teste escrito **antes** força a pensar no que é certo, e você vê ele falhar e
-  depois passar — prova de que ele funciona.
-- "Eu testei na mão e funcionou" não basta: não fica registrado, não dá para repetir
-  toda vez que algo mudar.
+- A test written **after** the code almost always passes immediately — which proves
+  nothing, because you never saw it catch a failure.
+- A test written **before** forces you to define what is correct, and you watch it go
+  from failing to passing — proof that it works.
+- "I tried it by hand and it worked" is not enough: it is not recorded and cannot be
+  repeated every time something changes.
 
-## O que apresentar para a pessoa
+## Always typed, always tested
 
-A cada parte construída, explique em linguagem simples:
+Every part is built in the project's mandated stack (TypeScript or Python — see
+`../AGENTS.md`), fully typed, with no untyped code (`any` in TS, an
+untyped function in Python). Tests are not optional.
 
-- o que essa parte faz;
-- qual verificação (teste) prova que ela funciona;
-- que todos os testes estão passando.
+## What to show the user
 
-## Quando corrigir um problema (bug)
+For each part built, explain in plain language:
 
-Antes de consertar, o agente escreve um teste que reproduz o problema (ele deve
-falhar), conserta até o teste passar, e assim o problema fica registrado para nunca
-mais voltar sem aviso.
+- what this part does;
+- which check (test) proves it works;
+- that all tests are passing.
 
-## Próximo passo
+## Fixing a bug
 
-Quando as partes do plano estiverem construídas e com testes passando, siga para a
-skill `requesting-code-review` para uma revisão antes de dar por pronto.
+Before fixing, write a test that reproduces the bug (it must fail), then fix until the
+test passes. This records the bug so it can never silently come back.
+
+## Next step
+
+When the plan's parts are built and tests pass, go to the `requesting-code-review`
+skill for a review before calling it done.

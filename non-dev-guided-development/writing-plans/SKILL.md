@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Second step of the guided flow for non-developers. Use after a design is approved in brainstorming. Turns the approved design into a clear plan of small, verifiable steps so the user knows exactly what will be built before any code is written.
+description: Step 2 of the guided development flow for non-developers. Use after a design is approved in brainstorming and before any code is written. Turns the approved design into a written plan of small, independently verifiable steps so the user knows exactly what will be built and in what order. Hand off to test-driven-development afterward.
 user-invocable: true
 allowed-tools:
   - Read
@@ -8,58 +8,68 @@ allowed-tools:
   - Edit
 ---
 
-# Writing Plans — Montar o plano
+# Writing Plans — Build the plan
 
-Depois que o desenho foi aprovado na skill `brainstorming`, transforme-o em um
-**plano de passos pequenos e claros**. O objetivo é que a pessoa (que não programa)
-consiga ler o plano e entender exatamente o que vai ser feito, na ordem.
+After the design is approved in the `brainstorming` skill, turn it into a **plan of
+small, clear steps**. The goal: the user (a non-developer) can read the plan and
+understand exactly what will be done, in order.
 
-**Avise ao começar:** "Estou montando o plano de construção a partir do desenho que
-você aprovou."
+> These instructions are for you, the agent. Talk to the user in their own language.
 
-**Salve o plano em:** `docs/plans/AAAA-MM-DD--plano.md`
+**Announce at the start:** "I'm building the construction plan from the design you
+approved."
 
-## Como dividir o trabalho
+**Save the plan to:** `docs/plans/YYYY-MM-DD--plan.md`
 
-Quebre tudo em **tarefas pequenas**, cada uma com um resultado que dá para verificar.
-Pense em passos de poucos minutos, do tipo:
+## How to split the work
 
-- escrever um teste que prova o que a parte deveria fazer;
-- rodar o teste e ver que ele falha (porque a parte ainda não existe);
-- construir o mínimo para o teste passar;
-- rodar de novo e ver que passou;
-- guardar o progresso.
+Break everything into **small tasks**, each with a result you can verify. Think in
+steps of a few minutes, such as:
 
-Cada tarefa deve deixar o projeto um pouco mais completo e funcionando por conta
-própria — nada de "metade de uma coisa".
+- write a test that proves what the part should do;
+- run the test and watch it fail (because the part does not exist yet);
+- build the minimum to make the test pass;
+- run it again and watch it pass;
+- save the progress.
 
-## O que cada tarefa precisa ter
+Each task must leave the project a bit more complete and working on its own — never
+"half of a thing."
 
-- **O que será feito**, em uma frase simples.
-- **Como saber que deu certo** — o que verificar ao final (o que aparece na tela,
-  o que o teste confirma).
-- A ordem em relação às outras tarefas.
+## What every task must include
 
-Você pode incluir os detalhes técnicos (arquivos, código), mas sempre acompanhados
-de uma explicação curta do "para quê", para a pessoa entender o sentido de cada passo.
+- **What will be done**, in one plain sentence.
+- **How to know it worked** — what to check at the end (what appears on screen,
+  what the test confirms).
+- Its order relative to the other tasks.
 
-## Nada de buracos no plano
+You may include technical details (files, code), but always with a short note on the
+"why," so the user grasps the point of each step.
 
-Não escreva passos vagos como "fazer o resto depois", "tratar os erros" ou "adicionar
-testes" sem dizer concretamente o quê. Se um passo precisa de detalhe, coloque o
-detalhe. Um plano com lacunas vira retrabalho.
+## No gaps in the plan
 
-## Revisão do plano (faça você mesmo)
+Do not write vague steps like "do the rest later," "handle the errors," or "add
+tests" without saying concretely what. If a step needs detail, put the detail in. A
+plan with gaps turns into rework.
 
-Releia o desenho e confira o plano contra ele:
+## Security is part of the plan
 
-1. **Cobertura** — cada coisa que o desenho pediu tem uma tarefa que a realiza?
-   Liste o que faltar e adicione.
-2. **Lacunas** — algum passo vago ou "a definir"? Corrija na hora.
-3. **Coerência** — os passos fazem sentido juntos e na ordem certa?
+If the design flagged anything security-sensitive (logins, payments, personal data,
+file uploads, external integrations), add **explicit tasks** for it — input
+validation, authorization checks, secret handling, dependency audit — each with its
+own test. Do not fold security into a vague "make it safe" step. See the Security
+rules in `../AGENTS.md`.
 
-## Apresentar e seguir
+## Self-review the plan
 
-Mostre o plano para a pessoa e explique-o em linguagem simples. Pergunte se ela
-aprova ou quer ajustar algo. Só depois da aprovação, siga para a skill
-`test-driven-development` para começar a construir.
+Reread the design and check the plan against it:
+
+1. **Coverage** — does every thing the design asked for have a task that delivers it?
+   List anything missing and add it.
+2. **Gaps** — any vague or "to be defined" step? Fix it now.
+3. **Coherence** — do the steps make sense together and in the right order?
+
+## Present and continue
+
+Show the plan to the user and explain it in plain language. Ask whether they approve
+or want to adjust anything. Only after approval, go to the `test-driven-development`
+skill to start building.

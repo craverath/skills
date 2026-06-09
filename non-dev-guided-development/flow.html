@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desenvolvimento guiado — Fluxo e Skills</title>
+<style>
+  :root{
+    --c1:#7c3aed; --c2:#2563eb; --c3:#16a34a; --c4:#ea580c; --c5:#0ea5e9;
+    --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --muted:#94a3b8;
+    --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+       background:var(--bg);color:var(--txt);line-height:1.55;padding:32px 20px 64px}
+  header{max-width:1100px;margin:0 auto 28px}
+  h1{margin:0 0 6px;font-size:1.9rem}
+  header p{margin:4px 0;color:var(--muted)}
+  header code{background:#0b1220;padding:1px 6px;border-radius:5px;font-size:.85em}
+  .wrap{max-width:1100px;margin:0 auto}
+  h2{font-size:1.25rem;margin:44px 0 14px;border-bottom:1px solid var(--line);padding-bottom:6px}
+  p.lead{color:var(--muted);margin:0 0 14px}
+
+  /* fluxo principal */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
+  .step{flex:1 1 165px;min-width:165px;background:var(--card);border:1px solid var(--line);
+        border-top:3px solid var(--line);border-radius:10px;padding:12px 14px;position:relative;
+        margin:8px 24px 8px 0}
+  .step:not(:last-child)::after{content:"→";position:absolute;right:-21px;top:50%;
+        transform:translateY(-50%);color:var(--muted);font-size:1.5rem}
+  .step .n{font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.5px}
+  .step .name{font-weight:700;font-size:.92rem;margin:3px 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .step .role{font-size:.8rem;color:var(--muted)}
+  .s1{border-top-color:var(--c1)} .s2{border-top-color:var(--c2)}
+  .s3{border-top-color:var(--c3)} .s4{border-top-color:var(--c4)} .s5{border-top-color:var(--c5)}
+
+  /* cards detalhados */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .skill{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);
+         border-radius:10px;padding:16px 18px}
+  .skill h3{margin:0 0 2px;font-size:1.02rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .skill .meta{font-size:.76rem;color:var(--muted);margin-bottom:10px}
+  .skill ul{margin:0;padding-left:18px}
+  .skill li{margin:5px 0;font-size:.88rem}
+  .e1{border-left-color:var(--c1)} .e2{border-left-color:var(--c2)}
+  .e3{border-left-color:var(--c3)} .e4{border-left-color:var(--c4)} .e5{border-left-color:var(--c5)}
+
+  /* regras transversais */
+  .rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .rule{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .rule h3{margin:0 0 8px;font-size:1rem}
+  .rule ul{margin:0;padding-left:18px} .rule li{margin:5px 0;font-size:.88rem}
+
+  /* árvore de stack */
+  .stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .branch{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .branch h3{margin:0 0 4px;font-size:.95rem}
+  .branch .q{color:var(--muted);font-size:.84rem;margin:0 0 10px}
+  .branch .pick{font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;
+        color:#fff;display:inline-block;padding:3px 9px;border-radius:6px;margin-bottom:8px}
+  .pweb{background:var(--c2)} .ppy{background:var(--c3)} .pdesk{background:var(--c4)}
+  .branch ul{margin:6px 0 0;padding-left:18px} .branch li{margin:4px 0;font-size:.83rem}
+  .tools{font-size:.78rem;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+
+  table.tie{width:100%;border-collapse:collapse;margin-top:6px;font-size:.86rem}
+  table.tie th,table.tie td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.tie th{color:var(--muted);font-weight:600}
+
+  footer{max-width:1100px;margin:48px auto 0;color:var(--muted);font-size:.8rem;
+         border-top:1px solid var(--line);padding-top:14px}
+  footer code{background:#0b1220;padding:1px 6px;border-radius:5px}
+
+  /* abas */
+  .tabs{max-width:1100px;margin:0 auto 8px;display:flex;gap:6px;border-bottom:1px solid var(--line)}
+  .tab-btn{background:none;border:none;color:var(--muted);font:inherit;font-weight:600;
+           padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tab-btn:hover{color:var(--txt)}
+  .tab-btn.active{color:#fff;border-bottom-color:var(--c2)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* passo a passo prático */
+  .steps-list{counter-reset:step;list-style:none;padding:0;margin:0}
+  .steps-list>li{background:var(--card);border:1px solid var(--line);border-radius:10px;
+        padding:16px 18px 16px 56px;position:relative;margin:12px 0}
+  .steps-list>li::before{counter-increment:step;content:counter(step);position:absolute;
+        left:16px;top:16px;width:26px;height:26px;border-radius:50%;background:var(--c2);
+        color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .steps-list h3{margin:0 0 6px;font-size:1rem}
+  .steps-list p{margin:4px 0;font-size:.9rem;color:var(--txt)}
+  .steps-list code{background:#0b1220;padding:1px 6px;border-radius:5px;font-size:.85em}
+
+  pre{background:#0b1220;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+      overflow:auto;font-size:.84rem;line-height:1.45;color:#cbd5e1}
+  pre .cmt{color:#64748b} pre .u{color:#60a5fa} pre .a{color:#34d399}
+
+  /* transcrição de exemplo */
+  .chat{display:flex;flex-direction:column;gap:10px;margin:8px 0}
+  .msg{max-width:88%;padding:10px 14px;border-radius:12px;font-size:.9rem}
+  .msg.user{align-self:flex-end;background:#1d4ed8;color:#fff;border-bottom-right-radius:3px}
+  .msg.agent{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:3px}
+  .msg .who{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;
+        opacity:.8;margin-bottom:3px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Desenvolvimento guiado</h1>
+  <p>Um fluxo passo a passo onde você descreve o que quer e o agente cuida da técnica,
+     explicando cada etapa em linguagem simples.</p>
+  <p>Baseado na metodologia <strong>Superpowers</strong>, simplificada para quem não programa.
+     Regras globais desta pasta em <code>AGENTS.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="flow">Fluxo &amp; Skills</button>
+  <button class="tab-btn" data-tab="practice">Na prática</button>
+</nav>
+
+<div class="wrap tab-panel active" id="tab-flow">
+
+  <h2>O fluxo em 5 passos</h2>
+  <p class="lead">Toda ideia percorre estes passos, na ordem. Nada é pulado por
+     "parecer simples", e cada decisão importante é aprovada por você antes de seguir.</p>
+  <div class="flow">
+    <div class="step s1"><div class="n">PASSO 1</div><div class="name">brainstorming</div>
+      <div class="role">Transformar a ideia em um desenho aprovado.</div></div>
+    <div class="step s2"><div class="n">PASSO 2</div><div class="name">writing-plans</div>
+      <div class="role">Virar o desenho em um plano de passos pequenos.</div></div>
+    <div class="step s3"><div class="n">PASSO 3</div><div class="name">test-driven-development</div>
+      <div class="role">Construir cada parte com testes primeiro.</div></div>
+    <div class="step s4"><div class="n">PASSO 4</div><div class="name">requesting-code-review</div>
+      <div class="role">Revisão independente antes de entregar.</div></div>
+    <div class="step s5"><div class="n">PASSO 5</div><div class="name">finishing-a-development-branch</div>
+      <div class="role">Conferir testes e entregar com sua confirmação.</div></div>
+  </div>
+
+  <h2>O que cada etapa faz</h2>
+  <div class="grid">
+
+    <div class="skill e1">
+      <h3>1. brainstorming</h3>
+      <div class="meta">Entrada: uma ideia solta · Saída: <code>docs/specs/AAAA-MM-DD--design.md</code> aprovado</div>
+      <ul>
+        <li>Conversa com você <strong>uma pergunta por vez</strong>, de preferência em múltipla escolha.</li>
+        <li>Propõe 2–3 <strong>abordagens</strong> (escopo/desenho) — a linguagem já é fixa pela stack.</li>
+        <li>Sinaliza o que é <strong>sensível</strong> (login, pagamento, dados pessoais, upload).</li>
+        <li><strong>Não escreve código nem cria arquivos</strong> antes do desenho ser aprovado.</li>
+      </ul>
+    </div>
+
+    <div class="skill e2">
+      <h3>2. writing-plans</h3>
+      <div class="meta">Entrada: desenho aprovado · Saída: <code>docs/plans/AAAA-MM-DD--plan.md</code> aprovado</div>
+      <ul>
+        <li>Quebra o trabalho em <strong>tarefas pequenas e verificáveis</strong> (poucos minutos cada).</li>
+        <li>Cada tarefa diz <strong>o que será feito</strong> e <strong>como saber que deu certo</strong>.</li>
+        <li>Sem lacunas: nada de "tratar erros depois" sem dizer concretamente o quê.</li>
+        <li>Confere o plano contra o desenho (cobertura, lacunas, coerência) antes de seguir.</li>
+      </ul>
+    </div>
+
+    <div class="skill e3">
+      <h3>3. test-driven-development</h3>
+      <div class="meta">Entrada: plano aprovado · Saída: código funcionando com testes passando</div>
+      <ul>
+        <li>Ciclo <strong>vermelho → verde → limpar</strong>: teste primeiro, vê falhar, constrói o mínimo, vê passar, organiza.</li>
+        <li><strong>Nenhuma parte é construída sem um teste que falhe antes.</strong></li>
+        <li>Bug? Primeiro um teste que o reproduz, depois o conserto — fica registrado para sempre.</li>
+        <li>Tudo <strong>tipado</strong> e na <strong>stack obrigatória</strong> (TypeScript ou Python).</li>
+      </ul>
+    </div>
+
+    <div class="skill e4">
+      <h3>4. requesting-code-review</h3>
+      <div class="meta">Entrada: funcionalidade pronta · Saída: problemas classificados e resolvidos</div>
+      <ul>
+        <li>Um revisor <strong>independente</strong> compara o que foi feito com o que o plano pedia.</li>
+        <li>Classifica os problemas: <strong>Crítico</strong> · <strong>Importante</strong> · <strong>Pequeno</strong>.</li>
+        <li>Passo de <strong>segurança</strong> obrigatório — toda falha conta como crítica/importante.</li>
+        <li>Críticos e importantes são resolvidos antes de entregar; pequenos ficam anotados.</li>
+      </ul>
+    </div>
+
+    <div class="skill e5">
+      <h3>5. finishing-a-development-branch</h3>
+      <div class="meta">Entrada: trabalho revisado · Saída: entrega feita com sua confirmação</div>
+      <ul>
+        <li>Roda <strong>todos os testes</strong>; se algum falha, para e mostra o que quebrou.</li>
+        <li>Apresenta opções claras: juntar, abrir Pull Request, deixar como está, ou descartar.</li>
+        <li>Descartar exige confirmação digitada (você escreve <code>discard</code>).</li>
+        <li><strong>Nunca</strong> faz commit/push/merge sozinho — só com sua confirmação explícita.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <h2>Regras que valem em todo o fluxo</h2>
+  <div class="rules">
+    <div class="rule">
+      <h3>🔒 Você sempre aprova</h3>
+      <ul>
+        <li>O agente não pula etapas, mesmo em projetos "simples".</li>
+        <li>Cada decisão importante é apresentada para você aprovar antes de seguir.</li>
+        <li>Nada de commit, push ou merge sem sua confirmação explícita.</li>
+      </ul>
+    </div>
+    <div class="rule">
+      <h3>🧪 Sempre com testes e tipos</h3>
+      <ul>
+        <li>Toda função nova tem teste; todo bug vira um teste de regressão.</li>
+        <li>Tipagem obrigatória — sem <code>any</code> em TS, sem função sem tipo em Python.</li>
+        <li>"Testei na mão" não basta: o teste fica registrado e repetível.</li>
+      </ul>
+    </div>
+    <div class="rule">
+      <h3>🗣️ Linguagem simples</h3>
+      <ul>
+        <li>Você não precisa entender o código — o agente traduz tudo.</li>
+        <li>Sem jargão; termos técnicos vêm com uma explicação curta.</li>
+        <li>O agente conversa no seu idioma (os prompts são em inglês, a conversa não).</li>
+      </ul>
+    </div>
+    <div class="rule">
+      <h3>🛡️ Segurança por padrão</h3>
+      <ul>
+        <li>Segredos nunca no código; <code>.env</code> fora do repositório.</li>
+        <li>Toda entrada externa é validada; acesso ao banco sem injeção.</li>
+        <li>Permissões conferidas no servidor; dependências auditadas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Tecnologia: a stack é fixa</h2>
+  <p class="lead">Você não escolhe a linguagem — ela é definida pelo tipo de projeto.
+     Só TypeScript ou Python, sempre tipado e testado.</p>
+  <div class="stack">
+    <div class="branch">
+      <h3>🌐 Site ou app no navegador</h3>
+      <p class="q">Páginas, painéis, login, dashboards, lojas…</p>
+      <span class="pick pweb">Next.js + TypeScript</span>
+      <div class="tools">pnpm · Vitest + Playwright · ESLint + Prettier · TS estrito (sem <code>any</code>)</div>
+    </div>
+    <div class="branch">
+      <h3>⚙️ Script, automação ou CLI</h3>
+      <p class="q">Processar arquivos/dados, integrar serviços, tarefas agendadas…</p>
+      <span class="pick ppy">Python</span>
+      <div class="tools">uv · pytest · pyright (estrito) · ruff · type hints completos</div>
+    </div>
+    <div class="branch">
+      <h3>🖥️ Programa de janela (desktop)</h3>
+      <p class="q">Aplicativo com interface que abre no computador.</p>
+      <span class="pick pdesk">Python ou Electron</span>
+      <div class="tools">Electron: TS + React · Python: PySide6 — veja o desempate abaixo</div>
+    </div>
+  </div>
+
+  <h2>Desempate de desktop: Python ou Electron?</h2>
+  <table class="tie">
+    <tr><th>Prefira Electron quando…</th><th>Prefira Python quando…</th></tr>
+    <tr>
+      <td>A interface é rica, visual ou parecida com um site.</td>
+      <td>O programa é mais sobre processar dados/arquivos do que sobre a tela.</td>
+    </tr>
+    <tr>
+      <td>Você reaproveita conhecimento/código web (Next.js).</td>
+      <td>Há muita integração com sistema operacional, hardware ou ferramentas locais.</td>
+    </tr>
+    <tr>
+      <td>Distribuir um instalador bonito multiplataforma importa.</td>
+      <td>A interface é simples e a instalação enxuta importa.</td>
+    </tr>
+  </table>
+
+  <h2>Segurança por stack</h2>
+  <p class="lead">Além das regras gerais (segredos, validação, sem injeção, menor
+     privilégio, dependências auditadas), cada base tem cuidados próprios.</p>
+  <div class="stack">
+    <div class="branch">
+      <h3>🌐 Web — Next.js</h3>
+      <ul>
+        <li>Auth com biblioteca confiável — nunca sessão/criptografia caseira.</li>
+        <li>Permissão conferida <strong>no servidor</strong>; esconder a tela não é controle.</li>
+        <li>Cookies <code>httpOnly</code>+<code>secure</code>; proteção contra CSRF e XSS; CSP definida.</li>
+        <li>Segredos só no servidor — nunca em <code>NEXT_PUBLIC_*</code>.</li>
+      </ul>
+    </div>
+    <div class="branch">
+      <h3>⚙️ Python</h3>
+      <ul>
+        <li>Validação com <code>pydantic</code>; consultas ao banco parametrizadas.</li>
+        <li>Sem <code>eval</code>/<code>exec</code> ou <code>pickle</code> em dados não confiáveis.</li>
+        <li><code>subprocess</code> sem <code>shell=True</code> com entrada externa.</li>
+        <li>Proteção contra path traversal ao lidar com arquivos.</li>
+      </ul>
+    </div>
+    <div class="branch">
+      <h3>🖥️ Electron</h3>
+      <ul>
+        <li><code>contextIsolation</code> e <code>sandbox</code> ligados; <code>nodeIntegration</code> desligado.</li>
+        <li>API mínima via <code>contextBridge</code>; toda mensagem IPC validada.</li>
+        <li>Carregar só conteúdo local confiável; CSP definida.</li>
+        <li>Nunca executar código remoto nem desligar <code>webSecurity</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="wrap tab-panel" id="tab-practice">
+
+  <h2>Como configurar no seu ambiente</h2>
+  <p class="lead">Você precisa do <strong>Claude Code</strong> instalado. As skills e
+     as regras ficam disponíveis em qualquer projeto seu — configura uma vez.</p>
+
+  <ol class="steps-list">
+    <li>
+      <h3>Instalar as skills (uma vez, vale para todo projeto)</h3>
+      <p>Copie as 5 pastas de skill para a pasta pessoal do Claude Code. A partir da
+         raiz deste repositório:</p>
+<pre><span class="cmt"># cria a pasta de skills pessoais e copia as 5 skills</span>
+mkdir -p ~/.claude/skills
+cp -R non-dev-guided-development/*/ ~/.claude/skills/</pre>
+      <p>Pronto: <code>brainstorming</code>, <code>writing-plans</code>,
+         <code>test-driven-development</code>, <code>requesting-code-review</code> e
+         <code>finishing-a-development-branch</code> passam a existir em qualquer projeto.</p>
+    </li>
+    <li>
+      <h3>Ligar as regras por padrão (stack, segurança, estilo)</h3>
+      <p>Acrescente o conteúdo das regras globais ao arquivo de memória do Claude Code.
+         Assim o agente já segue tudo sozinho, sem você precisar pedir:</p>
+<pre>cat non-dev-guided-development/AGENTS.md &gt;&gt; ~/.claude/CLAUDE.md</pre>
+      <p>É o que garante "só TypeScript ou Python", "sempre tipado e testado" e os
+         pontos de segurança em <em>todo</em> projeto.</p>
+    </li>
+    <li>
+      <h3>Ferramentas de cada stack (instala quando o projeto pedir)</h3>
+      <p>O agente avisa o que falta. Em geral: <code>Node.js</code> + <code>pnpm</code>
+         para web/Electron, e <code>Python</code> + <code>uv</code> para scripts.</p>
+<pre><span class="cmt"># pnpm (via Node/corepack)</span>
+corepack enable pnpm
+<span class="cmt"># uv (gerenciador de Python)</span>
+curl -LsSf https://astral.sh/uv/install.sh | sh</pre>
+    </li>
+    <li>
+      <h3>Conferir</h3>
+      <p>Abra o Claude Code dentro da pasta do seu projeto e digite <code>/</code> —
+         as 5 skills aparecem na lista. Para começar, chame <code>/brainstorming</code>.</p>
+    </li>
+  </ol>
+
+  <h2>Exemplo de uso na prática</h2>
+  <p class="lead">Caso real: "Quero uma página onde meus clientes marcam horário comigo."
+     Veja como cada etapa acontece — você só conversa e aprova.</p>
+
+  <ol class="steps-list">
+    <li>
+      <h3>Descrever a ideia — <code>/brainstorming</code></h3>
+      <div class="chat">
+        <div class="msg user"><span class="who">Você</span>Quero uma página onde meus clientes marcam horário comigo.</div>
+        <div class="msg agent"><span class="who">Agente</span>Isso é um app de navegador, então a base será <strong>Next.js + TypeScript</strong>. Primeira pergunta: os clientes precisam criar uma conta para marcar, ou basta nome e telefone?</div>
+        <div class="msg user"><span class="who">Você</span>Basta nome e telefone.</div>
+        <div class="msg agent"><span class="who">Agente</span>Como tem dados pessoais, vou marcar isso como sensível. Aqui está o desenho em 3 partes… (apresenta e pede aprovação)</div>
+      </div>
+      <p>Saída: o desenho aprovado fica salvo em <code>docs/specs/AAAA-MM-DD--design.md</code>.</p>
+    </li>
+    <li>
+      <h3>Montar o plano — <code>/writing-plans</code></h3>
+      <p>O agente transforma o desenho em tarefas pequenas e verificáveis, com tarefas
+         de segurança explícitas (validar nome/telefone, guardar dados com cuidado).
+         Você lê em linguagem simples e aprova. Salvo em <code>docs/plans/AAAA-MM-DD--plan.md</code>.</p>
+    </li>
+    <li>
+      <h3>Construir com testes — <code>/test-driven-development</code></h3>
+      <div class="chat">
+        <div class="msg agent"><span class="who">Agente</span>Escrevi um teste que confirma que marcar um horário ocupado é recusado. Rodei: ele <strong>falha</strong> (a regra ainda não existe). Agora construo o mínimo para passar…</div>
+        <div class="msg agent"><span class="who">Agente</span>Teste passando ✅ e os demais continuam verdes. Essa parte impede agendamento duplicado.</div>
+      </div>
+      <p>Ciclo <strong>vermelho → verde → limpar</strong>, parte por parte, tudo tipado.</p>
+    </li>
+    <li>
+      <h3>Revisar — <code>/requesting-code-review</code></h3>
+      <p>Uma revisão independente compara o feito com o plano e faz o passo de
+         segurança. Exemplo de retorno: <em>"1 importante: o telefone não estava sendo
+         validado — corrigido. Nenhum segredo no código."</em></p>
+    </li>
+    <li>
+      <h3>Entregar — <code>/finishing-a-development-branch</code></h3>
+      <div class="chat">
+        <div class="msg agent"><span class="who">Agente</span>Todos os testes passam. O que você quer fazer?<br>1. Juntar ao projeto · 2. Abrir Pull Request · 3. Deixar como está · 4. Descartar</div>
+        <div class="msg user"><span class="who">Você</span>Opção 2.</div>
+      </div>
+      <p>O agente <strong>nunca</strong> faz commit, push ou merge sem essa sua escolha explícita.</p>
+    </li>
+  </ol>
+
+  <p class="lead" style="margin-top:18px">Para uma próxima ideia, é só recomeçar pelo
+     <code>/brainstorming</code>.</p>
+
+</div>
+
+<footer>
+  Fluxo de skills em <code>non-dev-guided-development/</code> · Regras de stack e estilo em
+  <code>non-dev-guided-development/AGENTS.md</code>. Para uma nova ideia, recomece pelo passo
+  <code>brainstorming</code>.
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var tab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+      window.scrollTo({ top: 0 });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,63 +1,65 @@
 ---
 name: finishing-a-development-branch
-description: Final step of the guided flow for non-developers. Use when the work is built, reviewed, and all tests pass. Verifies tests, then presents clear delivery options and never finalizes (commit/merge/push) without explicit user confirmation.
+description: Step 5 (final) of the guided development flow for non-developers. Use when the work is built, reviewed, and ready to deliver. Verifies all tests pass, then presents clear delivery options in plain language. Never finalizes (commit, push, merge) or discards work without explicit user confirmation.
 user-invocable: true
 allowed-tools:
   - Read
   - Bash
 ---
 
-# Finishing a Development Branch — Entregar
+# Finishing a Development Branch — Deliver
 
-Última etapa do fluxo: finalizar o trabalho de forma segura. O agente confirma que
-está tudo funcionando e te apresenta opções claras de como entregar. Você decide.
+The final step of the flow: finish the work safely. Confirm everything works, then
+present clear delivery options. The user decides.
 
-**Avise ao começar:** "Estou finalizando o trabalho: vou conferir os testes e te
-apresentar as opções de entrega."
+> These instructions are for you, the agent. Talk to the user in their own language.
 
-## Regra de segurança (vale sempre)
+**Announce at the start:** "I'm wrapping up: I'll check the tests and then show you
+the delivery options."
 
-O agente **nunca** finaliza sozinho. Salvar o trabalho oficialmente (commit), enviá-lo
-(push) ou juntá-lo ao projeto principal (merge) só acontece **depois da sua confirmação
-explícita**. Veja as regras globais em `../global-rules/AGENTS.md`.
+## Safety rule (always)
 
-## Passos
+You **never** finalize on your own. Officially saving the work (commit), sending it
+(push), or merging it into the main project happens **only after the user's explicit
+confirmation**. See the global rules in `../AGENTS.md`.
 
-### 1. Conferir os testes
+## Procedure
 
-Antes de qualquer coisa, o agente roda todos os testes do projeto.
+### 1. Check the tests
 
-- **Se algum teste falhar:** ele te mostra o que falhou e **para aqui**. Não dá para
-  entregar com teste quebrado — primeiro conserta (voltando ao ciclo de testes).
-- **Se tudo passar:** segue para apresentar as opções.
+Before anything else, run all of the project's tests.
 
-### 2. Apresentar as opções
+- **If any test fails:** show what failed and **stop here**. You cannot deliver with a
+  broken test — fix it first (back to the test cycle in `test-driven-development`).
+- **If everything passes:** continue to present the options.
 
-O agente te apresenta opções claras, em linguagem simples, por exemplo:
+### 2. Present the options
+
+Offer clear options in plain language, for example:
 
 ```
-Trabalho pronto e testes passando. O que você quer fazer?
+Work is ready and tests pass. What would you like to do?
 
-1. Juntar ao projeto principal
-2. Enviar e abrir um pedido de revisão (Pull Request)
-3. Deixar como está (eu cuido disso depois)
-4. Descartar este trabalho
+1. Merge into the main project
+2. Push and open a Pull Request
+3. Leave it as is (I'll handle it later)
+4. Discard this work
 
-Qual opção?
+Which option?
 ```
 
-### 3. Executar a sua escolha
+### 3. Carry out the choice
 
-- O agente só executa a opção que você escolher, e confirma o resultado.
-- Para **descartar** (opção 4), ele pede uma confirmação digitada (você escreve
-  `descartar`) antes de apagar qualquer coisa, porque essa ação não tem volta.
-- Para qualquer ação que salve, envie ou junte o trabalho, ele confirma com você antes.
+- Execute only the option the user picks, and confirm the result.
+- For **discard** (option 4), require a typed confirmation (the user types `discard`)
+  before deleting anything, because that action cannot be undone.
+- For any action that saves, sends, or merges the work, confirm with the user first.
 
-## Nunca
+## Never
 
-- Seguir com testes falhando.
-- Apagar trabalho sem confirmação explícita.
-- Salvar, enviar ou juntar o trabalho sem você pedir.
+- Continue with failing tests.
+- Delete work without explicit confirmation.
+- Save, send, or merge the work without the user asking.
 
-Concluída a entrega, o fluxo está completo. Para uma próxima ideia, recomece pela
-skill `brainstorming`.
+Once delivery is done, the flow is complete. For the next idea, start again from the
+`brainstorming` skill.
