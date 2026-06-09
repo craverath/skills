@@ -115,6 +115,7 @@
 <nav class="tabs">
   <button class="tab-btn active" data-tab="flow">Fluxo &amp; Skills</button>
   <button class="tab-btn" data-tab="practice">Na prática</button>
+  <button class="tab-btn" data-tab="rules">Regras do projeto</button>
 </nav>
 
 <div class="wrap tab-panel active" id="tab-flow">
@@ -398,6 +399,88 @@ curl -LsSf https://astral.sh/uv/install.sh | sh</pre>
 
   <p class="lead" style="margin-top:18px">Para uma próxima ideia, é só recomeçar pelo
      <code>/brainstorming</code>.</p>
+
+</div>
+
+<div class="wrap tab-panel" id="tab-rules">
+
+  <h2>As regras para criar qualquer projeto</h2>
+  <p class="lead">Um resumo em tópicos, em linguagem simples, do que o agente
+     <strong>sempre</strong> segue ao construir — não importa a ideia. Você não
+     precisa decorar nada; é o agente que cumpre. O detalhe técnico completo está em
+     <code>AGENTS.md</code>.</p>
+
+  <div class="rules">
+
+    <div class="rule">
+      <h3>🧱 A linguagem já vem escolhida</h3>
+      <ul>
+        <li>Só <strong>TypeScript</strong> ou <strong>Python</strong> — nada além disso.</li>
+        <li>Você não decide a linguagem: ela vem do tipo de projeto (site → Next.js + TS; script → Python; desktop → Python ou Electron).</li>
+        <li>As ferramentas de cada base também são fixas, sem rediscutir a cada projeto.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🏷️ Sempre tipado</h3>
+      <ul>
+        <li>Cada pedaço de código diz que tipo de dado espera (texto, número, data…).</li>
+        <li>Isso pega erros cedo, antes de virarem um bug pra você.</li>
+        <li>Sem código "solto": nada de <code>any</code> em TS, nem função sem tipo em Python.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🧪 Sempre testado</h3>
+      <ul>
+        <li>Toda parte nova ganha um teste automático que prova que ela funciona.</li>
+        <li>Bug encontrado vira um teste — pra nunca voltar despercebido.</li>
+        <li>Os testes rodam com um comando só e precisam passar antes de entregar.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🛡️ Seguro desde o começo</h3>
+      <ul>
+        <li>Segredos (senhas, chaves) nunca no código — ficam no <code>.env</code>, fora do repositório.</li>
+        <li>Tudo que vem de fora é validado antes de usar (formulários, links, arquivos).</li>
+        <li>Acesso ao banco sem brechas, permissões conferidas no servidor, dependências auditadas.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🧹 Organizado e previsível</h3>
+      <ul>
+        <li>Segue a convenção do framework (Next.js, Django…), sem reinventar a estrutura.</li>
+        <li>Módulos pequenos e focados, em vez de arquivos gigantes que fazem tudo.</li>
+        <li>Caminhos previsíveis: cada coisa fica onde se espera encontrá-la.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🔒 Você aprova cada passo</h3>
+      <ul>
+        <li>O agente nunca salva (commit), envia (push) ou junta (merge) sozinho.</li>
+        <li>Cada decisão importante é apresentada para você aprovar antes de seguir.</li>
+        <li>Nada de pular etapas porque "parece simples".</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>🚀 Onde publicar</h3>
+      <ul>
+        <li>Projeto <strong>só front-end</strong> (só telas, sem banco e <strong>sem nenhuma chave de API</strong>) → vai direto para a <strong>Vercel</strong>.</li>
+        <li>Se usa <strong>chaves de API</strong>, precisa de um <strong>banco de dados</strong> ou de uma <strong>API separada</strong> → é estruturado com <strong>Docker</strong> e publicado no <strong>Coolify</strong>.</li>
+        <li>Na dúvida entre os dois, vale a regra mais segura: tem segredo ou servidor próprio? Então é Docker + Coolify.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <p class="lead" style="margin-top:18px">Coisas sensíveis (login, pagamento, dados
+     pessoais, upload) ganham tarefas e testes próprios e uma revisão de segurança
+     dedicada. A segurança específica de cada stack está detalhada na aba
+     <strong>Fluxo &amp; Skills</strong> e em <code>AGENTS.md</code>.</p>
 
 </div>
 
