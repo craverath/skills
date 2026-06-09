@@ -1,7 +1,6 @@
 ---
 name: finishing-a-development-branch
 description: Step 5 (final) of the guided development flow for non-developers. Use when the work is built, reviewed, and ready to deliver. Verifies all tests pass, then presents clear delivery options in plain language. Never finalizes (commit, push, merge) or discards work without explicit user confirmation.
-user-invocable: true
 allowed-tools:
   - Read
   - Bash

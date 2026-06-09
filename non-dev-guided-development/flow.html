@@ -173,12 +173,12 @@
 
     <div class="skill e4">
       <h3>4. requesting-code-review</h3>
-      <div class="meta">Entrada: funcionalidade pronta · Saída: problemas classificados e resolvidos</div>
+      <div class="meta">Entrada: funcionalidade pronta · Saída: problemas classificados; os que bloqueiam, corrigidos antes de entregar</div>
       <ul>
         <li>Um revisor <strong>independente</strong> compara o que foi feito com o que o plano pedia.</li>
         <li>Classifica os problemas: <strong>Crítico</strong> · <strong>Importante</strong> · <strong>Pequeno</strong>.</li>
         <li>Passo de <strong>segurança</strong> obrigatório — toda falha conta como crítica/importante.</li>
-        <li>Críticos e importantes são resolvidos antes de entregar; pequenos ficam anotados.</li>
+        <li>A revisão só aponta, não conserta: críticos e importantes voltam para a construção (com teste) antes de entregar; pequenos ficam anotados.</li>
       </ul>
     </div>
 
@@ -381,8 +381,10 @@ curl -LsSf https://astral.sh/uv/install.sh | sh</pre>
     <li>
       <h3>Revisar — <code>/requesting-code-review</code></h3>
       <p>Uma revisão independente compara o feito com o plano e faz o passo de
-         segurança. Exemplo de retorno: <em>"1 importante: o telefone não estava sendo
-         validado — corrigido. Nenhum segredo no código."</em></p>
+         segurança. Ela só aponta os problemas; a correção volta para a construção,
+         com teste. Exemplo de retorno: <em>"1 importante: o telefone não estava sendo
+         validado — voltou para a construção e foi corrigido com teste. Nenhum segredo
+         no código."</em></p>
     </li>
     <li>
       <h3>Entregar — <code>/finishing-a-development-branch</code></h3>

@@ -1,7 +1,6 @@
 ---
 name: requesting-code-review
 description: Step 4 of the guided development flow for non-developers. Use after building a feature and before finishing it. Runs an independent review of the work against the plan, reports problems classified by severity in plain language, and decides what must be fixed before delivery. Hand off to finishing-a-development-branch afterward.
-user-invocable: true
 allowed-tools:
   - Read
   - Bash
@@ -52,9 +51,13 @@ Treat any security finding as **Critical** or **Important** — never Minor.
 
 ## What to do with the result
 
-- Fix **critical** problems immediately.
-- Fix **important** problems before moving on.
-- Note **minor** problems for later.
+This skill only **reviews** — it does not change the code. Route every fix back
+through the build step so each one is done test-first:
+
+- **Critical** and **Important** problems → go back to the `test-driven-development`
+  skill and fix each one test-first (a failing test first, then the fix). Then run
+  this review again on the result.
+- **Minor** problems → note them for later; they do not block delivery.
 - If the reviewer is wrong on a point, explain why (backed by the tests that prove it
   works) instead of changing things blindly.
 
@@ -62,9 +65,11 @@ Treat any security finding as **Critical** or **Important** — never Minor.
 
 - Skip the review because "it's simple."
 - Ignore a critical problem.
-- Move on to delivery with important problems still open.
+- Fix code from inside this skill — send it back to `test-driven-development`.
+- Move on to delivery with critical or important problems still open.
 
 ## Next step
 
-With critical and important problems resolved, go to the
+Once the critical and important problems have been fixed back in
+`test-driven-development` and the review comes back clean, go to the
 `finishing-a-development-branch` skill to deliver.

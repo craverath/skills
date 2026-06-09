@@ -1,7 +1,6 @@
 ---
 name: test-driven-development
 description: Step 3 of the guided development flow for non-developers. Use while building each part of an approved plan. Enforces test-first construction (write a test, watch it fail, build the minimum to pass, then clean up) and explains each part to the user in plain language. Also covers fixing bugs test-first. Hand off to requesting-code-review afterward.
-user-invocable: true
 allowed-tools:
   - Read
   - Write

@@ -1,7 +1,6 @@
 ---
 name: writing-plans
 description: Step 2 of the guided development flow for non-developers. Use after a design is approved in brainstorming and before any code is written. Turns the approved design into a written plan of small, independently verifiable steps so the user knows exactly what will be built and in what order. Hand off to test-driven-development afterward.
-user-invocable: true
 allowed-tools:
   - Read
   - Write

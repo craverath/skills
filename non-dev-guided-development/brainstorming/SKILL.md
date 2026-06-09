@@ -1,7 +1,6 @@
 ---
 name: brainstorming
 description: Step 1 of the guided development flow for non-developers. Use when a non-developer describes something they want to build or change and has only a rough idea. Turns that idea into a clear, written, approved design through a one-question-at-a-time conversation. No code, files, or project scaffolding are created until the user approves the design. Hand off to writing-plans afterward.
-user-invocable: true
 allowed-tools:
   - Read
   - Write
