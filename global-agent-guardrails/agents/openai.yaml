@@ -1,0 +1,4 @@
+interface:
+  display_name: "Global Agent Guardrails"
+  short_description: "Block catastrophic shell commands before execution"
+  default_prompt: "Use $global-agent-guardrails to install or audit shared command guardrails."

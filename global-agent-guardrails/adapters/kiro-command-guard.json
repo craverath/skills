@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "global-agent-guardrails",
+      "description": "Block catastrophic shell commands before execution.",
+      "trigger": "PreToolUse",
+      "matcher": "shell",
+      "action": {
+        "type": "command",
+        "command": "/ABSOLUTE/HOME/.agents/hooks/deny-dangerous.sh"
+      },
+      "timeout": 5,
+      "enabled": true
+    }
+  ]
+}

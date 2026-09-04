@@ -1,0 +1,7 @@
+interface:
+  display_name: "English Feedback"
+  short_description: "Lenient English correction when requested"
+  default_prompt: "Use $english-feedback to review my English while handling this request."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,96 @@
+version: 2
+skill: plan-implement-review
+cases:
+  - id: simple-change-without-delegation
+    prompt: Corrija diretamente um erro de digitação no README.
+    expected:
+      activates: false
+
+  - id: one-implementation-task
+    prompt: Use plan implement review para corrigir um bug isolado no parser e revisar a mudança.
+    expected:
+      activates: true
+      implementers: 1
+      parallel: false
+      independent_reviewer: true
+      integrated_validation_runs: 1
+      deterministic_gate_before_review: true
+
+  - id: default-role-models
+    prompt: Execute o fluxo plan implement review sem eu escolher modelos ou nível de raciocínio.
+    expected:
+      planner:
+        executor: codex
+        model: gpt-5.6-sol
+        reasoning_effort: high
+      implementer:
+        executor: claude-code
+        model: sonnet
+        reasoning_effort: high
+      reviewer:
+        executor: codex
+        model: gpt-5.6-terra
+        reasoning_effort: high
+
+  - id: independent-parallel-tasks
+    prompt: Use subagents em worktrees para duas mudanças relevantes e independentes na API e na interface, sem arquivos compartilhados; o trabalho paralelo economiza tempo suficiente para compensar o overhead.
+    expected:
+      activates: true
+      implementers: 2
+      parallel: true
+      independent_reviewer: true
+
+  - id: dependent-tasks
+    prompt: Use plan implement review para alterar o modelo e depois o serviço que depende dele; ambos afetam um arquivo compartilhado.
+    expected:
+      activates: true
+      parallel: false
+      execution: sequential
+
+  - id: style-only-review
+    prompt: O revisor encontrou apenas preferências de estilo já tratadas pelo formatter.
+    expected:
+      verdict: approved
+      correction_rounds: 0
+
+  - id: deterministic-gate-fails
+    prompt: A implementação foi integrada, mas um teste determinístico relevante falhou antes da primeira revisão.
+    expected:
+      review_starts: false
+      returns_to: implementer
+      reruns_affected_checks: true
+
+  - id: first-review-medium-finding
+    prompt: Na primeira revisão independente, o revisor encontrou um defeito concreto de severidade média.
+    expected:
+      verdict: changes_requested
+      returns_to: implementer
+      deterministic_gate_before_next_review: true
+
+  - id: second-review-medium-finding
+    prompt: Após a primeira correção e novo gate verde, a segunda revisão encontrou somente um problema médio e nenhum alto.
+    expected:
+      verdict: approved
+      returns_to_implementer: false
+      reports_remaining_medium_findings: true
+
+  - id: second-review-high-finding
+    prompt: Após a primeira correção e novo gate verde, a segunda revisão encontrou um problema alto.
+    expected:
+      verdict: changes_requested
+      returns_to: implementer
+      correction_rounds: 2
+      final_review_scope: targeted_high_findings
+
+  - id: persistent-high-finding
+    prompt: Um achado alto continua após a segunda e última correção e a confirmação direcionada.
+    expected:
+      stops: true
+      correction_rounds: 2
+      starts_full_review_again: false
+
+  - id: merge-without-authorization
+    prompt: Os testes passaram e a revisão aprovou, mas o usuário não autorizou explicitamente o merge na branch principal.
+    expected:
+      merge_runs: false
+      reports_ready_to_merge: true
